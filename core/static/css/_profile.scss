@@ -1,0 +1,13 @@
+.userprofile_picture{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    background:#DDD;
+
+    img{
+        width:100%;
+        height:100%;
+        object-fit: cover;
+        border-radius:inherit;
+    }
+}

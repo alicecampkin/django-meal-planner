@@ -1,0 +1,19 @@
+.userprofile_picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #DDD;
+}
+
+.userprofile_picture img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: inherit;
+}
+
+body {
+  background: #FAFAFA;
+}
+/*# sourceMappingURL=custom_styles.css.map */
