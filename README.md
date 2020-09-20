@@ -7,6 +7,7 @@
 - Sign-up
 - Users can change their password
 - Users can update their details
+- Password reset
 
 ### Uses
 - Scss
@@ -14,7 +15,8 @@
 - JQuery (dependency of Bootstrap)
 
 ### TODO
-- Password reset
+- Resize and compress profile picture
+- Impose restrictions on user password strength
 
 ### Getting Started
 
