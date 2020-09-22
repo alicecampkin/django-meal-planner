@@ -3,6 +3,7 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 
+
 class UserManager(BaseUserManager):
     def create_user(self, email, first_name, password=None):
         """
@@ -40,11 +41,12 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    
+
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     username = models.CharField(max_length=100, blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='uploads/', null=True, blank=True)
+    profile_picture = models.ImageField(
+        upload_to='uploads/', default='/icons/member.svg')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
