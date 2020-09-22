@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="container">
+    <h3>Update member</h3>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="userprofile_picture">
+            {% if member.photo %}
+            <img src={{member.photo.url}} alt='profile picture of {{member.photo.url}}' />
+            {% endif %}
+        </div>
+
+        {% for field in form.visible_fields %}
+        <div class="form-group" enctype='multipart/form-data'>
+            {{ field.label_tag }}
+            {% render_field field class="form-control" %}
+            {% if field.errors %}
+            <div class="alert alert-danger">
+                {% for error in field.errors %}
+                <small>{{error}}</small>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <input type="submit" class="btn btn-primary" value="Update">
+        <a href="{% url 'delete_member' member.id %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'index' %}" class="btn btn-info-outline">Go Back</a>
+    </form>
+</div>
+
+
+{% endblock %}

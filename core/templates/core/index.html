@@ -1,9 +1,28 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% block content %}
 
 <div class="container">
     <h3>Welcome</h3>
+    <section class="members">
+        <h2 class="text-center">Members</h2>
+        <div class="members_row">
+            <div>
+                <img src="{{user.profile_picture.url}}" alt="{{user.first_name}}" width="100" height="100" />
+                <h6 class="text-center">{{user.first_name}}</h6>
+            </div>
+            {% for member in members %}
+            <a href="{% url 'update_member' member.id %}">
+                <img src="{{member.photo.url}}" alt="{{member.name}}" width="100" height="100" />
+                <h6 class="text-center">{{member.name}}</h6>
+            </a>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'add_member' %}" class="btn btn-primary-outline">Add Member</a>
+
+
+    </section>
 </div>
 
 

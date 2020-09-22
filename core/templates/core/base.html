@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django Starter</title>
+    <title>Meal Planner</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/custom_styles.css' %}">
@@ -13,7 +13,7 @@
 
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal"><a href="{% url 'index' %}" class="text-dark">Django Starter</a>
+        <h5 class="my-0 mr-md-auto font-weight-normal"><a href="{% url 'index' %}" class="text-dark">Meal Planner</a>
         </h5>
         <nav class="my-2 my-md-0 mr-md-3">
             {% if user.is_authenticated %}

@@ -142,3 +142,5 @@ dmypy.json
 
 .zshrc
 media/uploads/
+
+*/migrations/
