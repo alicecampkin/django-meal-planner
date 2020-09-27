@@ -34,6 +34,7 @@
         {% endfor %}
 
         <input class="btn btn-primary" type="submit" value="Update">
+        <a href="{% url 'delete_meal' meal.id %}" class="btn btn-outline-danger">Delete</a>
     </form>
 </div>
 {% endblock %}
