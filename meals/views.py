@@ -5,8 +5,10 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Meal
 from .forms import CreateMealForm
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def list_meals(request):
     meals = Meal.objects.all()
 
@@ -16,7 +18,7 @@ def list_meals(request):
     return render(request, 'meals/list_meals.html', context)
 
 
-class AddMeal(CreateView):
+class AddMeal(LoginRequiredMixin, CreateView):
     model = Meal
     form_class = CreateMealForm
     template_name = 'meals/add_meal.html'
@@ -29,3 +31,16 @@ class AddMeal(CreateView):
         kwargs = super(AddMeal, self).get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
+
+
+class UpdateMeal(LoginRequiredMixin, UpdateView):
+    model = Meal
+    form_class = CreateMealForm
+    template_name = 'core/update_meal.html'
+    success_url = reverse_lazy('index')
+
+
+class DeleteMeal(LoginRequiredMixin, DeleteView):
+    model = Meal
+    template_name = 'core/delete_meal.html'
+    success_url = reverse_lazy('index')
