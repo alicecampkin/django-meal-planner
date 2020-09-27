@@ -4,11 +4,17 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Member
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
 
-    members = Member.objects.all()
+    return render(request, 'core/index.html')
+
+
+@login_required
+def list_members(request):
+    members = Member.objects.filter(user=request.user)
 
     context = {
         'members': members
