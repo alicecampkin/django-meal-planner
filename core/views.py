@@ -20,14 +20,14 @@ def list_members(request):
         'members': members
     }
 
-    return render(request, 'core/index.html', context)
+    return render(request, 'core/list_members.html', context)
 
 
 class AddMember(LoginRequiredMixin, CreateView):
     model = Member
     fields = ['name', 'photo']
     template_name = 'core/add_member.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list_members')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -38,10 +38,10 @@ class UpdateMember(LoginRequiredMixin, UpdateView):
     model = Member
     fields = ['name', 'photo']
     template_name = 'core/update_member.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list_members')
 
 
 class DeleteMember(LoginRequiredMixin, DeleteView):
     model = Member
     template_name = 'core/delete_member.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list_members')
