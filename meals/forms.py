@@ -2,6 +2,15 @@ from django import forms
 from .models import Meal
 from core.models import Member
 
+MEALTIME_CHOICES = [
+    ('Breakfast', 'Breakfast'),
+    ('Lunch', 'Lunch'),
+    ('Dinner', 'Dinner'),
+    ('Snack', 'Snack'),
+    ('Starter', 'Starter'),
+    ('Dessert', 'Dessert'),
+]
+
 
 class CustomModelMultipleChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, member):
@@ -21,11 +30,11 @@ class CreateMealForm(forms.ModelForm):
 
     class Meta:
         model = Meal
-        fields = ['name', 'date', 'members']
+        fields = ['name', 'mealtime', 'date', 'members']
 
     name = forms.CharField()
     date = forms.DateInput()
-
+    mealtime = forms.ChoiceField(choices=MEALTIME_CHOICES)
     members = CustomModelMultipleChoiceField(
         queryset=None,
         widget=forms.CheckboxSelectMultiple

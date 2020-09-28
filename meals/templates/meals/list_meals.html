@@ -10,6 +10,7 @@
     {% for meal in meals %}
     <div class="card">
         <h5 class="card-title">{{meal.name}}</h5>
+
         <h6 class="card-subtitle">{{meal.date | date:"D d M" }}</h6>
 
         <div class="card-body col-md">
@@ -17,7 +18,10 @@
             <img width=32 height=32 src={{member.photo.url}} alt={{member.name}} />
             <small>{{member.name}}</small>
             {% endfor %}
-            <a href="{% url 'update_meal' meal.id%}" class="btn btn-outline-info">Update</a>
+            <br>
+            <small class="text-muted">{{meal.mealtime}}</small>
+            <br>
+            <a href="{% url 'update_meal' meal.id%}" class="btn-sm btn-outline-info">Update</a>
         </div>
 
     </div>
