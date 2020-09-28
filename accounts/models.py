@@ -12,9 +12,12 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError('Users must have an email address')
 
+        if not first_name.strip():
+            raise ValueError('Users must have provide a name')
+
         user = self.model(
             email=self.normalize_email(email),
-            first_name=first_name,
+            first_name=first_name.strip(),
         )
 
         user.set_password(password)
