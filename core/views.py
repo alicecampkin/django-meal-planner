@@ -1,10 +1,11 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Member
 from django.contrib.auth.decorators import login_required
+from .forms import InitaliseHouseholdForm
 
 
 def index(request):
@@ -21,6 +22,28 @@ def list_members(request):
     }
 
     return render(request, 'core/list_members.html', context)
+
+
+@login_required
+def initialise_members(request):
+
+    if request.method == "POST":
+        form = InitaliseHouseholdForm(request.POST, request.FILES)
+        if form.is_valid():
+            member_instance = Member(
+                photo=request.FILES['photo'], name=request.POST['name'], user=request.user)
+            member_instance.save()
+
+            return redirect('list_members')
+
+    else:
+        form = InitaliseHouseholdForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'core/create_first_member.html', context)
 
 
 class AddMember(LoginRequiredMixin, CreateView):

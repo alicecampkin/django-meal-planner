@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+
+    <form method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <img src="{% static 'icons/member.svg' %}" width="150" height="150" class="userprofile_picture"
+            alt="profile-picture" />
+        <h5>What shall we call you?</h5>
+        {% for field in form.visible_fields %}
+        <div class="form-group">
+
+            {% render_field field class="form-control" %}
+            {% if field.errors %}
+            <div class="alert alert-danger">
+                {% for error in field.errors %}
+                <small>{{error}}</small>
+                {% endfor %}
+            </div>
+
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <input type="submit" class="btn btn-primary" value="Next">
+    </form>
+</div>
+
+
+{% endblock %}

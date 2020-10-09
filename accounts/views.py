@@ -14,11 +14,19 @@ class SignUp(CreateView):
     template_name = 'accounts/signup.html'
     success_url = reverse_lazy('index')
 
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        self.object = form.save()
+
+        return super().form_valid(form)
+
+
 class SignIn(LoginView):
     template_name = 'accounts/login.html'
+
 
 class UpdateUser(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'accounts/profile.html'
-    fields = ['profile_picture','first_name','last_name']
+    fields = ['profile_picture', 'first_name', 'last_name']
     success_url = reverse_lazy('index')
