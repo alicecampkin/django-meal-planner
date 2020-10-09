@@ -144,3 +144,5 @@ dmypy.json
 media/uploads/
 
 */migrations/
+
+launch.json
