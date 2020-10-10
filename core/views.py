@@ -29,9 +29,16 @@ def initialise_members(request):
 
     if request.method == "POST":
         form = InitaliseHouseholdForm(request.POST, request.FILES)
+
         if form.is_valid():
+
             member_instance = Member(
-                photo=request.FILES['photo'], name=request.POST['name'], user=request.user)
+                photo=request.FILES['photo'],
+                name=request.POST['name'],
+                user=request.user,
+                is_primary=True
+            )
+
             member_instance.save()
 
             return redirect('list_members')
