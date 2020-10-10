@@ -5,7 +5,8 @@
 {% block content %}
 
 <div class="container">
-    <h3>Update member</h3>
+    <h3>Hi, {{member.name}}</h3>
+    <a href="{% url 'change_password' %}" class="btn btn-outline-primary">Change Password</a>
     <form method="post" enctype='multipart/form-data'>
         {% csrf_token %}
 
@@ -31,8 +32,6 @@
         {% endfor %}
 
         <input type="submit" class="btn btn-primary" value="Update">
-        <a href="{% url 'delete_member' member.id %}" class="btn btn-danger">Delete</a>
-        <a href="{% url 'list_members' %}" class="btn btn-info-outline">Go Back</a>
     </form>
 </div>
 
