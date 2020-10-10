@@ -5,35 +5,7 @@
 <div class="container">
 
     <h1>Update Profile</h1>
-
-    <form method="post" enctype="multipart/form-data" novalidate>
-        {% csrf_token %}
-
-        <div class="userprofile_picture">
-            {% if user.profile_picture %}
-            <img src={{user.profile_picture.url}} alt='profile picture of {{user.first_name}}' />
-            {% endif %}
-        </div>
-
-        {% for field in form.visible_fields %}
-        <div class="form-group">
-            {{ field.label_tag }}
-            {% render_field field class="form-control" %}
-            {% if field.errors %}
-            <div class="alert alert-danger">
-                {% for error in field.errors %}
-                <small>{{error}}</small>
-                {% endfor %}
-            </div>
-
-            {% endif %}
-        </div>
-        {% endfor %}
-
-        <a href="{% url 'password_change' %}" class="btn btn-outline-primary">Change Password</a>
-        <br>
-        <input class="btn btn-primary" type="submit" value="Update">
-    </form>
+    <a href="{% url 'password_change' %}" class="btn btn-outline-primary">Change Password</a>
 
 </div>
 

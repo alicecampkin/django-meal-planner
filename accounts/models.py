@@ -5,33 +5,28 @@ from django.contrib.auth.models import (
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, first_name, password=None):
+    def create_user(self, email, password=None):
         """
-        Creates and saves a User with the given email, first name and password.
+        Creates and saves a User with the given email, and password.
         """
         if not email:
             raise ValueError('Users must have an email address')
 
-        if not first_name.strip():
-            raise ValueError('Users must have provide a name')
-
         user = self.model(
             email=self.normalize_email(email),
-            first_name=first_name.strip(),
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, first_name, password=None):
+    def create_superuser(self, email, password=None):
         """
-        Creates and saves a superuser with the given email, first name and password.
+        Creates and saves a superuser with the given email, and password.
         """
         user = self.create_user(
             email,
             password=password,
-            first_name=first_name,
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -45,18 +40,13 @@ class User(AbstractBaseUser):
         unique=True,
     )
 
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    username = models.CharField(max_length=100, blank=True, null=True)
-    profile_picture = models.ImageField(
-        upload_to='uploads/', default='/icons/member.svg')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name']
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.email

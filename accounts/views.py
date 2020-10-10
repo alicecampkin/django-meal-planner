@@ -31,5 +31,5 @@ class SignIn(LoginView):
 class UpdateUser(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'accounts/profile.html'
-    fields = ['profile_picture', 'first_name', 'last_name']
+    fields = []
     success_url = reverse_lazy('index')
