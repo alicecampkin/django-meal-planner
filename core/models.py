@@ -9,6 +9,7 @@ def user_directory_path(instance, filename):
 
 class Member(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_primary = models.BooleanField(default=False)
     name = models.CharField(max_length=100)
     photo = models.ImageField(
         upload_to='uploads/members/', default='/icons/member.svg')
