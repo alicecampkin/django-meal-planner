@@ -1,0 +1,44 @@
+.datecard{
+    background:white;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    padding: 1rem;
+    width:100%;
+    max-width: 1000px;
+}
+.mealscard{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: left;
+
+    div{
+        position:relative;
+        margin:0.5rem;
+        border-radius: 5px;
+        flex-grow: 1;
+        min-width: 300px;
+        min-height:100px;
+        padding: 0.5rem;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+    }
+
+    &__breakfast{
+        background:antiquewhite;
+    }
+
+    &__lunch{
+        background:blanchedalmond;
+    }
+
+    &__dinner{
+        background:beige;
+    }
+
+    &__add{
+        position:absolute;
+        top:5px;
+        right:5px;
+    }
+
+}

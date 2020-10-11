@@ -6,6 +6,25 @@
     <a href="{% url 'add_meal' %}" class="btn btn-primary">Add Meal</a>
 </div>
 
+<article class="datecard">
+    <h5>Monday 13th October</h5>
+
+    <section class="mealscard">
+        <div class="mealscard__breakfast">
+            <h6>Breakfast</h6>
+            <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
+        </div>
+        <div class="mealscard__lunch">
+            <h6>Lunch</h6>
+            <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
+        </div>
+        <div class="mealscard__dinner">
+            <h6>Dinner</h6>
+            <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
+        </div>
+    </section>
+</article>
+
 <div class="col-md-4">
     {% for meal in meals %}
     <div class="card">

@@ -47,6 +47,60 @@
   margin: 2rem;
 }
 
+.datecard {
+  background: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.mealscard {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+}
+
+.mealscard div {
+  position: relative;
+  margin: 0.5rem;
+  border-radius: 5px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  min-width: 300px;
+  min-height: 100px;
+  padding: 0.5rem;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.mealscard__breakfast {
+  background: antiquewhite;
+}
+
+.mealscard__lunch {
+  background: blanchedalmond;
+}
+
+.mealscard__dinner {
+  background: beige;
+}
+
+.mealscard__add {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
 body {
   background: #FAFAFA;
 }
