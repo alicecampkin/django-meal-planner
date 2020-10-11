@@ -90,7 +90,6 @@ def update_member(request, pk):
     member = get_object_or_404(Member, id=pk)
 
     if member.is_primary:
-        print('True')
         return redirect('profile')
 
     if request.method == 'POST':
