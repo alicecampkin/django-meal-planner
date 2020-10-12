@@ -1,3 +1,5 @@
+import json
+from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -10,11 +12,16 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def list_meals(request):
-    meals = Meal.objects.filter(user=request.user).order_by('date')
+    meals_queryset = Meal.objects.filter(
+        user=request.user).order_by('date').values()
 
-    context = {
-        'meals': meals
-    }
+    meals = list(meals_queryset)
+    for meal in meals:
+        meal['date'] = meal['date'].isoformat()
+
+    context = {}
+    context['meals'] = json.dumps(meals)
+
     return render(request, 'meals/list_meals.html', context)
 
 
