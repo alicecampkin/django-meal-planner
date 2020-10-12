@@ -1,52 +1,43 @@
 {% extends 'core/base.html' %}
 
+
+
 {% block content %}
-<div class="container">
-    <h6>Meal List</h6>
-    <a href="{% url 'add_meal' %}" class="btn btn-primary">Add Meal</a>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type='text/javascript'>
+    const meals = {{ meals| safe }};
+    console.log(meals)
+</script>
 
-<article class="datecard">
-    <h5>Monday 13th October</h5>
+<div id="app">
 
-    <section class="mealscard">
-        <div class="mealscard__breakfast">
-            <h6>Breakfast</h6>
-            <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
-        </div>
-        <div class="mealscard__lunch">
-            <h6>Lunch</h6>
-            <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
-        </div>
-        <div class="mealscard__dinner">
-            <h6>Dinner</h6>
-            <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
-        </div>
-    </section>
-</article>
-
-<div class="col-md-4">
-    {% for meal in meals %}
-    <div class="card">
-        <h5 class="card-title">{{meal.name}}</h5>
-
-        <h6 class="card-subtitle">{{meal.date | date:"D d M" }}</h6>
-
-        <div class="card-body col-md">
-            {% for member in meal.members.all %}
-            <img width=32 height=32 src={{member.photo.url}} alt={{member.name}} />
-            <small>{{member.name}}</small>
-            {% endfor %}
-            <br>
-            <small class="text-muted">{{meal.mealtime}}</small>
-            <br>
-            <a href="{% url 'update_meal' meal.id%}" class="btn-sm btn-outline-info">Update</a>
-        </div>
-
+    <div class="container">
+        <h6>Meal List</h6>
+        <a href="{% url 'add_meal' %}" class="btn btn-primary">Add Meal</a>
     </div>
-    {% endfor %}
+
+    [[message]]
+
+
+
 
 </div>
 
+
+<script>
+    var app = new Vue({
+        delimiters: ['[[', ']]'],
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            meals: meals,
+        },
+        methods: {
+            greet: function (name) {
+                console.log('Hello from ' + name + '!')
+            }
+        }
+    });
+</script>
 
 {% endblock %}
