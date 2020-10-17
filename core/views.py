@@ -31,12 +31,19 @@ def initialise_members(request):
 
         if form.is_valid():
 
-            member_instance = Member(
-                photo=request.FILES['photo'],
-                name=request.POST['name'],
-                user=request.user,
-                is_primary=True
-            )
+            if 'photo' in request.FILES:
+                member_instance = Member(
+                    photo=request.FILES['photo'],
+                    name=request.POST['name'],
+                    user=request.user,
+                    is_primary=True
+                )
+            else:
+                member_instance = Member(
+                    name=request.POST['name'],
+                    user=request.user,
+                    is_primary=True
+                )
 
             member_instance.save()
 
@@ -58,7 +65,7 @@ def update_primary_member(request):
         user=request.user, is_primary=True).first()
 
     if not primary_member:
-        return Http404('<h1> Page Not Found </h1>')
+        return redirect('create_profile')
     else:
 
         if request.method == 'POST':
