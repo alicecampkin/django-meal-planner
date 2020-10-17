@@ -3,11 +3,12 @@
 
 
 {% block content %}
+
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script type='text/javascript'>
-    const meals = {{ meals| safe }};
-    console.log(meals)
-</script>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
+<script>dayjs.extend(window.dayjs_plugin_utc)</script>
+
 
 <div id="app">
 
@@ -16,26 +17,80 @@
         <a href="{% url 'add_meal' %}" class="btn btn-primary">Add Meal</a>
     </div>
 
-    [[message]]
+    <button v-on:click="page -= 1">Prev</button>
 
+    <div class="card" v-for="item in mealsList">
+        <h5 class="card-title">[[item.date]]</h5>
+        <ul class="card-body">
+            <li v-for="meal in item.meals">
+                [[meal.name]]
+                <br>
+                <small>[[meal.mealtime]]</small>
+            </li>
+        </ul>
+    </div>
 
+    <button v-on:click="page += 1">Next</button>
 
 
 </div>
 
 
 <script>
+
+    const meals = JSON.parse(`{{ meals| safe }}`)
+    console.log(meals)
+
     var app = new Vue({
         delimiters: ['[[', ']]'],
         el: '#app',
+
         data: {
-            message: 'Hello Vue!',
             meals: meals,
+            daysPerPage:7,
+            page: 0,
         },
+
         methods: {
             greet: function (name) {
-                console.log('Hello from ' + name + '!')
+                this.daysPerPage = 6
+                console.log(this.daysPerPage)
             }
+
+        },
+
+        computed: {
+
+            dates : function() {
+                const day = dayjs()
+                const pageStart = this.page * this.daysPerPage
+                const pageEnd = pageStart + this.daysPerPage
+
+                const dates = []
+
+                for (let i=pageStart; i<pageEnd; i++){
+                    dates.push(day.add(i,'day'))
+                }
+
+                return dates
+            },
+
+            mealsList : function() {
+
+                const list = this.dates.map( date => {
+
+                    daysMeals = meals.filter( x => x.date == date.format('YYYY-MM-DD'))
+
+                    return {
+                        date: date.format('dddd D MMMM'),
+                        meals: daysMeals,
+                    }
+                })
+                console.log(list)
+                return list
+            }
+
+
         }
     });
 </script>
