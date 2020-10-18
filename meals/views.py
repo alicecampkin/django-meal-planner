@@ -6,7 +6,8 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Meal
-from .forms import CreateMealForm
+from core.models import Member
+from .forms import CreateMealForm, TestForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -19,8 +20,12 @@ def list_meals(request):
     for meal in meals:
         meal['date'] = meal['date'].isoformat()
 
+    form = TestForm()
+
     context = {}
     context['meals'] = json.dumps(meals)
+    context['form'] = form
+    context['members'] = Member.objects.filter(user=request.user)
 
     return render(request, 'meals/list_meals.html', context)
 
