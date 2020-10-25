@@ -102,6 +102,20 @@
   right: 5px;
 }
 
+.mealform {
+  width: 300px;
+  position: relative;
+}
+
+.mealform li {
+  list-style: none;
+  margin-right: 2rem;
+}
+
+.mealform input[type=checkbox] {
+  margin-right: 0.25rem;
+}
+
 body {
   background: #FAFAFA;
 }

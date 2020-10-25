@@ -1,18 +1,44 @@
 import json
 from datetime import datetime
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Meal
 from core.models import Member
-from .forms import CreateMealForm, TestForm
+from .forms import CreateMealForm
 from django.contrib.auth.decorators import login_required
 
 
 @login_required
 def list_meals(request):
+    meals_queryset = []
+    default_mealtime = 'Dinner'
+
+    if request.method == 'POST':
+        form = CreateMealForm(request.POST, request=request)
+
+        if form.is_valid():
+            meal = Meal(
+                name=request.POST['name'],
+                date=request.POST['date'],
+                mealtime=request.POST['mealtime'],
+                user=request.user
+            )
+            meal.save()
+
+            member_ids = form.cleaned_data['members'].values_list(
+                'id', flat=True)
+
+            for id in member_ids:
+                meal.members.add(id)
+
+            default_mealtime = meal.mealtime
+
+    else:
+        form = CreateMealForm(request=request)
+
     meals_queryset = Meal.objects.filter(
         user=request.user).order_by('date').values()
 
@@ -20,12 +46,10 @@ def list_meals(request):
     for meal in meals:
         meal['date'] = meal['date'].isoformat()
 
-    form = TestForm()
-
     context = {}
     context['meals'] = json.dumps(meals)
     context['form'] = form
-    context['members'] = Member.objects.filter(user=request.user)
+    context['default_mealtime'] = default_mealtime
 
     return render(request, 'meals/list_meals.html', context)
 

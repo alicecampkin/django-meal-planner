@@ -13,80 +13,42 @@
 <div id="app" class="row">
 
     <div class="col">
-        <h3>Add</h3>
-        <form method="post" action="{% url 'add_meal' %}">
-            {% csrf_token %}
-            <label for="id_name">Name:[[formMeal]]</label>
-            <input type="text" name="name" maxlength="255" id="id_name" required v-model="formMeal"><br>
-            <label for="id_mealtime">Meal Time</label>
-            <select name="mealtime" id="id_mealtime" v-model="formMealTime">
-                <option disabled value="">Please select one</option>
-                <option value="Breakfast">Breakfast</option>
-                <option value="Lunch">Lunch</option>
-                <option value="Dinner">Dinner</option>
-            </select><br>
-            <input type="date" name="date" id="id_date" v-model="formDate"><br>
-            <input type="submit" value="Add" class="btn btn-primary"><br>
-        </form>
+        {% include 'partials/addmeal.html' %}
     </div>
 
     <div class="col">
-        <button v-on:click="page -= 1">Prev</button>
-        <button v-on:click="page = 0">Today</button>
-        <button v-on:click="page += 1">Next</button>
+        <button v-on:click="page -= 1" class="btn btn-outline-secondary">Prev</button>
+        <button v-on:click="page = 0" class="btn btn-outline-secondary">Today</button>
+        <button v-on:click="page += 1" class="btn btn-outline-secondary">Next</button>
+
+        <button v-on:click="mealTime = 'Breakfast'" class="btn btn-sm btn-info">Breakfast</button>
+        <button v-on:click="mealTime = 'Lunch'" class="btn btn-sm btn-info">Lunch</button>
+        <button v-on:click="mealTime = 'Dinner'" class="btn btn-sm btn-info">Dinner</button>
 
         <article v-for="day in schedule" class="datecard" v-on:click="formDate = day.dateForForm">
             <h5>[[day.date]]</h5>
 
-            <section class="mealscard">
-                <div class="mealscard__breakfast" v-on:click="formMealTime = 'Breakfast'">
-                    <h6>Breakfast</h6>
-                    <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
-                    <ul>
-                        <li v-for="breakfast in day.breakfasts">
-                            [[breakfast.name]]
-                        </li>
-                    </ul>
-
-                </div>
-                <div class="mealscard__lunch" v-on:click="formMealTime = 'Lunch'">
-                    <h6>Lunch</h6>
-                    <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
-                    <ul>
-                        <li v-for="lunch in day.lunches">
-                            [[lunch.name]]
-                        </li>
-                    </ul>
-                </div>
-                <div class="mealscard__dinner" v-on:click="formMealTime = 'Dinner'">
-                    <h6>Dinner</h6>
-                    <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
-                    <ul>
-                        <li v-for="dinner in day.dinners">
-                            [[dinner.name]]
-                        </li>
-                    </ul>
-                </div>
+            <section v-if="mealTime == 'Breakfast'">
+                <h6>Breakfast</h6>
+                <li v-for="breakfast in day.breakfasts">
+                    [[breakfast.name]]
+                </li>
             </section>
 
-            <section>
-                <form method="post" action="{% url 'add_meal' %}">
-                    {% csrf_token %}
-                    <label for="id_name">Name:[[formMeal]]</label>
-                    <input type="text" name="name" maxlength="255" id="id_name" required v-model="formMeal"><br>
-                    <label for="id_mealtime">Meal Time</label>
-                    <select name="mealtime" id="id_mealtime" v-model="formMealTime">
-                        <option disabled value="">Please select one</option>
-                        <option value="Breakfast">Breakfast</option>
-                        <option value="Lunch">Lunch</option>
-                        <option value="Dinner">Dinner</option>
-                    </select><br>
-                    <input type="date" name="date" id="id_date" v-model="day.dateForForm"><br>
-                    <label for="id_members">Who's eating?</label>
-                    
-                    <input type="submit" value="Add" class="btn btn-primary"><br>
-                </form>
+            <section v-if="mealTime == 'Lunch'">
+                <h6>Lunch</h6>
+                <li v-for="lunch in day.lunches">
+                    [[lunch.name]]
+                </li>
             </section>
+
+            <section v-if="mealTime == 'Dinner'">
+                <h6>Dinner</h6>
+                <li v-for="dinner in day.dinners">
+                    [[dinner.name]]
+                </li>
+            </section>
+
         </article>
     </div>
 
@@ -100,6 +62,7 @@
 <script>
 
     const meals = JSON.parse(`{{ meals| safe }}`)
+    const defaultMealtime = `{{ default_mealtime | safe}}`
     console.log(meals)
 
     var app = new Vue({
@@ -108,12 +71,13 @@
 
         data: {
             meals: meals,
-            daysPerPage:7,
+            daysPerPage: 7,
             page: 0,
             formDate: null,
             formMealTime: '',
             formMeal: null,
             showMeals: true,
+            mealTime: defaultMealtime,
         },
 
         methods: {
@@ -126,28 +90,28 @@
 
         computed: {
 
-            dates : function() {
+            dates: function () {
                 const day = dayjs()
                 const pageStart = this.page * this.daysPerPage
                 const pageEnd = pageStart + this.daysPerPage
 
                 const dates = []
 
-                for (let i=pageStart; i<pageEnd; i++){
-                    dates.push(day.add(i,'day'))
+                for (let i = pageStart; i < pageEnd; i++) {
+                    dates.push(day.add(i, 'day'))
                 }
 
                 return dates
             },
 
-            schedule : function() {
+            schedule: function () {
 
-                const list = this.dates.map( date => {
+                const list = this.dates.map(date => {
 
-                    const daysMeals = meals.filter( x => x.date == date.format('YYYY-MM-DD'))
-                    const breakfasts = daysMeals.filter( x => x.mealtime == 'Breakfast')
-                    const lunches = daysMeals.filter( x => x.mealtime == 'Lunch')
-                    const dinners = daysMeals.filter( x => x.mealtime == 'Dinner')
+                    const daysMeals = meals.filter(x => x.date == date.format('YYYY-MM-DD'))
+                    const breakfasts = daysMeals.filter(x => x.mealtime == 'Breakfast')
+                    const lunches = daysMeals.filter(x => x.mealtime == 'Lunch')
+                    const dinners = daysMeals.filter(x => x.mealtime == 'Dinner')
 
                     return {
                         date: date.format('dddd D MMMM'),

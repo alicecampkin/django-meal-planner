@@ -1,0 +1,13 @@
+.mealform{
+    width:300px;
+    position: relative;
+
+    li{
+        list-style: none;
+        margin-right:2rem;
+    }
+
+    input[type=checkbox]{
+        margin-right:0.25rem;
+    }
+}

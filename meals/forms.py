@@ -39,11 +39,3 @@ class CreateMealForm(forms.ModelForm):
         queryset=None,
         widget=forms.CheckboxSelectMultiple
     )
-
-class TestForm(forms.ModelForm):
-
-    class Meta:
-        model = Meal
-        fields = ['name', 'mealtime', 'date']
-
-    mealtime = forms.ChoiceField(choices=MEALTIME_CHOICES)
