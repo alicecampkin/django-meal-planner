@@ -109,9 +109,9 @@
                 const list = this.dates.map(date => {
 
                     const daysMeals = meals.filter(x => x.date == date.format('YYYY-MM-DD'))
-                    const breakfasts = daysMeals.filter(x => x.mealtime == 'Breakfast')
-                    const lunches = daysMeals.filter(x => x.mealtime == 'Lunch')
-                    const dinners = daysMeals.filter(x => x.mealtime == 'Dinner')
+                    const breakfasts = daysMeals.filter(x => x.mealtime == 'Breakfast').sort((a, b) => a.id > b.id ? 1 : -1)
+                    const lunches = daysMeals.filter(x => x.mealtime == 'Lunch').sort((a, b) => a.id > b.id ? 1 : -1)
+                    const dinners = daysMeals.filter(x => x.mealtime == 'Dinner').sort((a, b) => a.id > b.id ? 1 : -1)
 
                     return {
                         date: date.format('dddd D MMMM'),
@@ -122,7 +122,7 @@
                         dinners: dinners
                     }
                 })
-                console.log(list)
+
                 return list
             }
 
