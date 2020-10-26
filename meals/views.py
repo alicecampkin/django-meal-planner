@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def list_meals(request):
+    members = Member.objects.filter(user=request.user)
+
     meals_queryset = []
     default_mealtime = 'Dinner'
 
@@ -39,17 +41,26 @@ def list_meals(request):
     else:
         form = CreateMealForm(request=request)
 
-    meals_queryset = Meal.objects.filter(
-        user=request.user).order_by('date').values()
+    queryset = Meal.objects.filter(user=request.user).order_by(
+        'date').prefetch_related('members')
 
-    meals = list(meals_queryset)
-    for meal in meals:
-        meal['date'] = meal['date'].isoformat()
+    meals = []
+    for meal in queryset:
+        meal_members = [member.name for member in meal.members.all()]
+        meals.append({
+            'name': meal.name,
+            'date': meal.date.isoformat(),
+            'mealtime': meal.mealtime,
+            'members': meal_members
+        })
 
     context = {}
     context['meals'] = json.dumps(meals)
     context['form'] = form
     context['default_mealtime'] = default_mealtime
+    context['members'] = members
+    context['member_names'] = json.dumps(
+        list(members.values_list('name', flat=True)))
 
     return render(request, 'meals/list_meals.html', context)
 
