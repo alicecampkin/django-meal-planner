@@ -13,7 +13,16 @@
 <div id="app" class="row">
 
     <div class="col">
-        {% include 'partials/addmeal.html' %}
+        <div>
+            <h5>Add</h5>
+            {% include 'partials/addmeal.html' %}
+        </div>
+
+        <div>
+            <h5>Filter</h5>
+            {% include 'partials/memberfilter.html' %}
+        </div>
+
     </div>
 
     <div class="col">
@@ -62,6 +71,8 @@
 <script>
 
     const meals = JSON.parse(`{{ meals| safe }}`)
+    const memberNames = JSON.parse(`{{ member_names | safe }}`)
+
     const defaultMealtime = `{{ default_mealtime | safe}}`
     console.log(meals)
 
@@ -78,6 +89,7 @@
             formMeal: null,
             showMeals: true,
             mealTime: defaultMealtime,
+            checkedMembers: memberNames
         },
 
         methods: {
@@ -108,7 +120,23 @@
 
                 const list = this.dates.map(date => {
 
-                    const daysMeals = meals.filter(x => x.date == date.format('YYYY-MM-DD'))
+                    // const daysMeals = meals.filter(x => x.date == date.format('YYYY-MM-DD'))
+
+                    const daysMeals = meals.filter(meal => {
+                        if (meal.date !== date.format('YYYY-MM-DD')) {
+                            return false
+                        }
+
+                        const commonMembers = meal.members.filter(x => this.checkedMembers.includes(x))
+
+                        if (commonMembers.length > 0) {
+                            return true
+                        } else {
+                            return false
+                        }
+
+                    })
+
                     const breakfasts = daysMeals.filter(x => x.mealtime == 'Breakfast').sort((a, b) => a.id > b.id ? 1 : -1)
                     const lunches = daysMeals.filter(x => x.mealtime == 'Lunch').sort((a, b) => a.id > b.id ? 1 : -1)
                     const dinners = daysMeals.filter(x => x.mealtime == 'Dinner').sort((a, b) => a.id > b.id ? 1 : -1)
