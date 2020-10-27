@@ -1,3 +1,78 @@
+.meallist {
+  width: 95vw;
+  max-width: 1500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 auto;
+}
+
+.meallist__controls {
+  width: 300px;
+  margin-right: 5rem;
+  padding-top: 3rem;
+}
+
+.meallist__calendar {
+  min-width: 600px;
+  padding: 0 2rem;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.meallist__calendar__mealtimecontrols {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.meallist__calendar__mealtimecontrols button {
+  margin: 0 0.25rem;
+}
+
+.meallist__calendar__cards {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  margin: 1rem 0;
+  -webkit-column-gap: 1rem;
+          column-gap: 1rem;
+  row-gap: 0.5rem;
+}
+
+.meallist__calendar__datecontrols {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.card {
+  background: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  min-width: 300px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0.5rem;
+  min-height: 150px;
+}
+
 .userprofile_picture {
   width: 150px;
   height: 150px;
@@ -47,63 +122,10 @@
   margin: 2rem;
 }
 
-.datecard {
-  background: white;
-  border-radius: 5px;
-  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  width: 100%;
-  max-width: 1000px;
-  margin: 1rem 0;
-}
-
-.mealscard {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
-}
-
-.mealscard div {
-  position: relative;
-  margin: 0.5rem;
-  border-radius: 5px;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  min-width: 300px;
-  min-height: 100px;
-  padding: 0.5rem;
-  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.mealscard__breakfast {
-  background: antiquewhite;
-}
-
-.mealscard__lunch {
-  background: blanchedalmond;
-}
-
-.mealscard__dinner {
-  background: beige;
-}
-
-.mealscard__add {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-}
-
 .mealform {
   width: 300px;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
   position: relative;
 }
 
@@ -114,6 +136,25 @@
 
 .mealform input[type=checkbox] {
   margin-right: 0.25rem;
+}
+
+.mealform input[type=submit] {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.checkbox-group {
+  width: 100%;
+  padding-top: 0.5rem;
+}
+
+.checkbox-group ul {
+  padding-left: 0.5rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
 }
 
 .avatar {

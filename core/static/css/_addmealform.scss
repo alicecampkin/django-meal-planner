@@ -1,5 +1,7 @@
 .mealform{
     width:300px;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
     position: relative;
 
     li{
@@ -9,5 +11,22 @@
 
     input[type=checkbox]{
         margin-right:0.25rem;
+    }
+
+    input[type=submit]{
+        position: absolute;
+        right:0;
+        bottom:0;
+    }
+
+}
+
+.checkbox-group{
+    width: 100%;
+    padding-top:0.5rem;
+    ul{
+        padding-left: 0.5rem;
+        display:grid;
+        grid-template-columns: 1fr 1fr;
     }
 }

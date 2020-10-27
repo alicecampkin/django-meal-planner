@@ -4,7 +4,7 @@
 
     {{fields.name}}
 
-    <div class="input-group">
+    <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text">{{form.name.label}}</label>
         </div>
@@ -18,16 +18,16 @@
         {% render_field form.mealtime v-model="mealTime" class="custom-select" %}
     </div>
 
-    <div class="input-group">
+    <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text" for="id_mealtime">{{form.date.label}}</label>
         </div>
         {% render_field form.date v-model="formDate" class="form-control" %}
     </div>
 
-    <div class="form-group">
+    <div class="checkbox-group">
         <h6>{{form.members.label_tag}}</h6>
-        {% render_field form.members class="form-check-inline" checked=true %}
+        {% render_field form.members checked=true %}
     </div>
 
     <input type="submit" value="Add" class="btn btn-sm btn-primary">
