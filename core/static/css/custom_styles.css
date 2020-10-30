@@ -1,5 +1,8 @@
+/* Breakfast */
+/* Lunch */
+/* Dinner */
 .meallist {
-  width: 95vw;
+  width: 90vw;
   max-width: 1500px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -28,9 +31,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .meallist__calendar__mealtimecontrols button {
@@ -71,6 +74,65 @@
   max-width: 400px;
   margin: 0.5rem;
   min-height: 150px;
+}
+
+.card--active {
+  outline: 1px solid #D6E396;
+  border-radius: 0;
+  -webkit-box-shadow: 2px 2px 10px #DEE9AB;
+          box-shadow: 2px 2px 10px #DEE9AB;
+}
+
+.custom-btn {
+  position: relative;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  border: 1px solid #40414C;
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+  background: white;
+}
+
+.custom-btn--breakfast:hover {
+  background: #D4E4F5;
+  border: 1px solid #5494D8;
+}
+
+.custom-btn--breakfast--active {
+  background: #D4E4F5;
+  border: 1px solid #5494D8;
+}
+
+.custom-btn--breakfast--active:hover {
+  background: #D4E4F5;
+}
+
+.custom-btn--lunch:hover {
+  background: #DCDBEE;
+  border: 1px solid #7271BC;
+}
+
+.custom-btn--lunch--active {
+  background: #DCDBEE;
+  border: 1px solid #7271BC;
+}
+
+.custom-btn--lunch--active:hover {
+  background: #DCDBEE;
+}
+
+.custom-btn--dinner:hover {
+  background: #D9F1EC;
+  border: 1px solid #47BBA2;
+}
+
+.custom-btn--dinner--active {
+  background: #D9F1EC;
+  border: 1px solid #47BBA2;
+}
+
+.custom-btn--dinner--active:hover {
+  background: #D9F1EC;
 }
 
 .userprofile_picture {
@@ -129,6 +191,16 @@
   position: relative;
 }
 
+.mealform__date {
+  margin-bottom: 0;
+}
+
+.mealform__helptext {
+  display: block;
+  padding: 0.5rem 0.1rem;
+  font-size: 0.9rem;
+}
+
 .mealform li {
   list-style: none;
   margin-right: 2rem;
@@ -157,26 +229,16 @@
       grid-template-columns: 1fr 1fr;
 }
 
-.avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #fafafa;
-  margin: 0.5rem;
-  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+.filtermembers {
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
-.avatar img {
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  -o-object-fit: cover;
-     object-fit: cover;
-  opacity: 0.3;
-}
-
-.toggle {
+.filtermembers__member {
   display: block;
   text-align: center;
   width: -webkit-fit-content;
@@ -186,29 +248,42 @@
   font-size: 0.85rem;
 }
 
-.toggle input {
+.filtermembers__member__photo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #fafafa;
+  margin: 0.5rem;
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.filtermembers__member__photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0.3;
+}
+
+.filtermembers__member input {
   display: none;
 }
 
-.toggle input:checked + div img {
+.filtermembers__member input:checked + div img {
   opacity: 1;
 }
 
-.toggle input:checked + div img:hover {
+.filtermembers__member input:checked + div img:hover {
   opacity: 0.8;
-}
-
-.member_filter {
-  width: 300px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
 }
 
 body {
   background: #FAFAFA;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 main {

@@ -1,26 +1,31 @@
-.avatar {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: #fafafa;
-    margin: 0.5rem;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-  
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-      object-fit: cover;
-      opacity: 0.3;
-    }
-  }
-  
-.toggle {
+.filtermembers {
+  width:300px;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__member{
     display: block;
     text-align: center;
     width: fit-content;
     font-family: sans-serif;
     font-size: 0.85rem;
+
+    &__photo{
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: #fafafa;
+      margin: 0.5rem;
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        object-fit: cover;
+        opacity: 0.3;
+      }
+    }
   
     input {
       display: none;
@@ -36,13 +41,11 @@
       }
 
     }
+
+  }
 }
-  
-.member_filter {
-    width:300px;
-    display: flex;
-    flex-wrap: wrap;
-}
+
+
   
 
   

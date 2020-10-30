@@ -1,0 +1,8 @@
+<div class="meallist__calendar__mealtimecontrols">
+    <a v-on:click="mealTime = 'Breakfast'" v-bind:class="{'custom-btn--breakfast--active': mealTime == 'Breakfast'}"
+        class="custom-btn custom-btn--breakfast">Breakfast</a>
+    <a v-on:click="mealTime = 'Lunch'" v-bind:class="{'custom-btn--lunch--active': mealTime == 'Lunch'}"
+        class="custom-btn custom-btn--lunch">Lunch</a>
+    <a v-on:click="mealTime = 'Dinner'" v-bind:class="{'custom-btn--dinner--active': mealTime == 'Dinner'}"
+        class="custom-btn custom-btn--dinner">Dinner</a>
+</div>

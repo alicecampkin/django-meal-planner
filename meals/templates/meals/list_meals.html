@@ -13,28 +13,18 @@
 <div id="app" class="meallist">
 
     <div class="meallist__controls">
-        <div>
-            <h5>Add</h5>
-            {% include 'partials/addmeal.html' %}
-        </div>
-
-        <div>
-            <h5>Filter</h5>
-            {% include 'partials/memberfilter.html' %}
-        </div>
-
+        {% include 'partials/addmeal.html' %}
+        {% include 'partials/memberfilter.html' %}
     </div>
 
     <div class="meallist__calendar">
 
-        <div class="meallist__calendar__mealtimecontrols">
-            <button v-on:click="mealTime = 'Breakfast'" class="btn btn-sm btn-info">Breakfast</button>
-            <button v-on:click="mealTime = 'Lunch'" class="btn btn-sm btn-info">Lunch</button>
-            <button v-on:click="mealTime = 'Dinner'" class="btn btn-sm btn-info">Dinner</button>
-        </div>
+        {% include 'partials/mealtimecontrols.html' %}
 
         <div class="meallist__calendar__cards">
-            <article v-for="day in schedule" class="card" v-on:click="formDate = day.dateForForm">
+            <article v-for="(day, i) in schedule" class="card" :class="{ 
+                        'card--active': activeCardIndex === i }" @click="setActiveIndex(day, i)"
+                v-on:click="activeDate = day.dateForForm">
                 <h5>[[day.date]]</h5>
 
                 <section v-if="mealTime == 'Breakfast'">
@@ -57,7 +47,6 @@
                         [[dinner.name]]
                     </li>
                 </section>
-
             </article>
         </div>
 
@@ -66,13 +55,7 @@
             <button v-on:click="page = 0" class="btn btn-sm btn-outline-secondary">Today</button>
             <button v-on:click="page += 1" class="btn btn-sm btn-outline-secondary">Next</button>
         </div>
-
     </div>
-
-
-
-
-
 </div>
 
 
@@ -92,7 +75,8 @@
             meals: meals,
             daysPerPage: 6,
             page: 0,
-            formDate: null,
+            activeCardIndex: 0,
+            activeDate: dayjs().format('YYYY-MM-DD'),
             formMealTime: '',
             formMeal: null,
             showMeals: true,
@@ -101,9 +85,10 @@
         },
 
         methods: {
-            greet: function (name) {
-                this.daysPerPage = 6
-                console.log(this.daysPerPage)
+            setActiveIndex(day, i) {
+                this.activeCardIndex = i
+                console.log(i)
+                console.log(this.i)
             }
 
         },
@@ -160,6 +145,19 @@
                 })
 
                 return list
+            },
+
+            activeCardClass: function () {
+                return {
+                    'active--breakfast': this.mealTime == 'Breakfast',
+                    'active--lunch': this.mealTime == 'Lunch',
+                    'active--dinner': this.mealTime == 'Dinner'
+                }
+
+            },
+
+            activeDateFormatted: function () {
+                return dayjs(this.activeDate).format('dddd D MMMM')
             }
 
 

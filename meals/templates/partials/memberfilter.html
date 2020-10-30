@@ -1,16 +1,14 @@
-<section class="member_filter">
+<section class="filtermembers">
     {% for member in members %}
 
-    <label for="{{member.name}}" class="toggle">
+    <label for="{{member.name}}" class="filtermembers__member">
         <input type="checkbox" v-model="checkedMembers" name="members" value="{{member.name}}" id="{{member.name}}"
             checked>
-        <div class="avatar">
+        <div class="filtermembers__member__photo">
             <img src="{{member.photo.url}}" />
         </div>
         {{member.name}}
     </label>
 
     {% endfor %}
-
-
 </section>

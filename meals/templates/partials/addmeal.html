@@ -2,7 +2,8 @@
     {% csrf_token %}
     {% load widget_tweaks %}
 
-    {{fields.name}}
+    <h5 class="mealform__date">[[activeDateFormatted]]</h5>
+    <small class="mealform__helptext">Add a meal</small>
 
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -11,6 +12,7 @@
         {% render_field form.name class="form-control" %}
     </div>
 
+
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text" for="id_mealtime">{{form.mealtime.label}}</label>
@@ -18,11 +20,11 @@
         {% render_field form.mealtime v-model="mealTime" class="custom-select" %}
     </div>
 
-    <div class="input-group mb-3">
+    <div style="display:none;" class="input-group mb-3">
         <div class="input-group-prepend">
             <label class="input-group-text" for="id_mealtime">{{form.date.label}}</label>
         </div>
-        {% render_field form.date v-model="formDate" class="form-control" %}
+        {% render_field form.date v-model="activeDate" class="form-control" %}
     </div>
 
     <div class="checkbox-group">
