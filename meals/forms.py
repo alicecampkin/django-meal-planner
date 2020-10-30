@@ -6,9 +6,6 @@ MEALTIME_CHOICES = [
     ('Breakfast', 'Breakfast'),
     ('Lunch', 'Lunch'),
     ('Dinner', 'Dinner'),
-    ('Snack', 'Snack'),
-    ('Starter', 'Starter'),
-    ('Dessert', 'Dessert'),
 ]
 
 
