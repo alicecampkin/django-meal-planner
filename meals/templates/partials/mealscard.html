@@ -1,15 +1,43 @@
-<article class="datecard">
-    <h5>Monday 13th October</h5>
+{% load static %}
 
-    <section class="mealscard">
-        <div class="mealscard__breakfast">
-            <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
-        </div>
-        <div class="mealscard__lunch">
-            <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
-        </div>
-        <div class="mealscard__dinner">
-            <a href="#" class="btn btn-sm btn-outline-dark mealscard__add"> + </a>
-        </div>
+<article v-for="(day, i) in schedule" class="card" :class="{ 
+    'card--active': activeCardIndex === i }" @click="setActiveIndex(day, i)" v-on:click="activeDate = day.dateForForm">
+    <h5 class="card__date">[[day.date]]</h5>
+
+    <section v-if="mealTime == 'Breakfast'">
+        <h6 class="card__mealtime card__mealtime--breakfast">Breakfast</h6>
+        <ul class="card__meals">
+            <li class="card__meal card__meal--breakfast" v-for="breakfast in day.breakfasts">
+                [[breakfast.name]]
+                <a v-on:click="deleteMeal(breakfast.id)" class="card__meal__delete">
+                    <img src="{% static 'icons/exit.svg' %}" alt="Delete Meal">
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <section v-if="mealTime == 'Lunch'">
+        <h6 class="card__mealtime card__mealtime--lunch">Lunch</h6>
+        <ul class="card__meals">
+            <li class="card__meal card__meal--lunch" v-for="lunch in day.lunches">
+                [[lunch.name]]
+                <a v-on:click="deleteMeal(lunch.id)" class="card__meal__delete">
+                    <img src="{% static 'icons/exit.svg' %}" alt="Delete Meal">
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <section v-if="mealTime == 'Dinner'">
+        <h6 class="card__mealtime card__mealtime--dinner">Dinner</h6>
+        <ul class="card__meals">
+            <li class="card__meal card__meal--dinner" v-for="dinner in day.dinners">
+                [[dinner.name]]
+                <a v-on:click="deleteMeal(dinner.id)" class="card__meal__delete">
+                    <img src="{% static 'icons/exit.svg' %}" alt="Delete Meal">
+                </a>
+            </li>
+        </ul>
+
     </section>
 </article>

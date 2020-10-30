@@ -63,26 +63,6 @@
           justify-content: space-between;
 }
 
-.card {
-  background: white;
-  border-radius: 5px;
-  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  min-width: 300px;
-  width: 100%;
-  max-width: 400px;
-  margin: 0.5rem;
-  min-height: 150px;
-}
-
-.card--active {
-  outline: 1px solid #D6E396;
-  border-radius: 0;
-  -webkit-box-shadow: 2px 2px 10px #DEE9AB;
-          box-shadow: 2px 2px 10px #DEE9AB;
-}
-
 .custom-btn {
   position: relative;
   margin-left: 1rem;
@@ -123,12 +103,12 @@
 
 .custom-btn--dinner:hover {
   background: #D9F1EC;
-  border: 1px solid #47BBA2;
+  border: 1px solid #2a7262;
 }
 
 .custom-btn--dinner--active {
   background: #D9F1EC;
-  border: 1px solid #47BBA2;
+  border: 1px solid #2a7262;
 }
 
 .custom-btn--dinner--active:hover {
@@ -182,6 +162,108 @@
   -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
           box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   margin: 2rem;
+}
+
+/* Breakfast */
+/* Lunch */
+/* Dinner */
+.card {
+  position: relative;
+  background: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  min-width: 300px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0.5rem;
+  min-height: 150px;
+}
+
+.card--active {
+  outline: 1px solid #D6E396;
+  border-radius: 0;
+  -webkit-box-shadow: 2px 2px 10px #DEE9AB;
+          box-shadow: 2px 2px 10px #DEE9AB;
+}
+
+.card__date {
+  font-weight: 700;
+  color: #40414C;
+}
+
+.card__meals {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.card__meal {
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  list-style: none;
+  font-size: 0.85rem;
+  margin: 0.25rem;
+  padding: 2px 25px 2px 15px;
+  border-radius: 20px;
+}
+
+.card__meal--breakfast {
+  background: #D4E4F5;
+  border: 1px solid #5494D8;
+}
+
+.card__meal--lunch {
+  background: #DCDBEE;
+  border: 1px solid #7271BC;
+}
+
+.card__meal--dinner {
+  background: #D9F1EC;
+  border: 1px solid #47BBA2;
+}
+
+.card__meal__delete img {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 9px;
+  right: 9px;
+}
+
+.card__mealtime {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-transform: uppercase;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.card__mealtime--breakfast {
+  color: #2561a1;
+  border: 2px solid #5494D8;
+}
+
+.card__mealtime--lunch {
+  color: #414087;
+  border: 2px solid #7271BC;
+}
+
+.card__mealtime--dinner {
+  color: #2a7262;
+  border: 2px solid #47BBA2;
 }
 
 .mealform {

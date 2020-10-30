@@ -1,0 +1,95 @@
+@import './colours';
+
+.card{
+    position: relative;
+    background:white;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    padding: 1rem;
+    min-width:300px;
+    width:100%;
+    max-width:400px;
+    margin:0.5rem;
+    min-height:150px;
+
+    &--active {
+        outline: 1px solid $yellow-1;
+        border-radius: 0;
+        box-shadow: 2px 2px 10px $yellow-2;
+    }
+
+    &__date {
+        font-weight: 700;
+        color:$grey-1;
+    }
+
+    &__meals{
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__meal {
+        position: relative;
+        width: fit-content;
+        list-style: none;
+        font-size: 0.85rem;
+        margin:0.25rem;
+        padding: 2px 25px 2px 15px;
+        border-radius: 20px;
+
+        &--breakfast{
+            background: $blue-4;
+            border: 1px solid $blue-1;
+        }
+
+        &--lunch{
+            background: $purple-4;
+            border: 1px solid $purple-1;
+        }
+
+        &--dinner{
+            background: $teal-4;
+            border: 1px solid $teal-1;
+        }
+
+        &__delete {
+
+            img{
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                top: 9px;
+                right:9px;
+            }
+
+        }
+    }
+
+    &__mealtime{
+        position:absolute;
+        top:12px;
+        right:12px;
+        width:fit-content;
+        text-transform: uppercase;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 0.7rem;
+        font-weight:700;
+
+        &--breakfast{
+            color: darken($blue-1, 20%);
+            border: 2px solid $blue-1;
+        }
+
+        &--lunch{
+            color: darken($purple-1, 20%);
+            border: 2px solid $purple-1;
+        }
+
+        &--dinner{
+            color: darken($teal-1, 20%);
+            border: 2px solid $teal-1;
+        }
+    }
+}

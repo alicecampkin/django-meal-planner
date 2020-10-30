@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -48,6 +48,7 @@ def list_meals(request):
     for meal in queryset:
         meal_members = [member.name for member in meal.members.all()]
         meals.append({
+            'id': meal.id,
             'name': meal.name,
             'date': meal.date.isoformat(),
             'mealtime': meal.mealtime,
@@ -63,6 +64,12 @@ def list_meals(request):
         list(members.values_list('name', flat=True)))
 
     return render(request, 'meals/list_meals.html', context)
+
+
+def delete_meal(request, pk):
+    meal = Meal.objects.get(pk=pk)
+    meal.delete()
+    return JsonResponse({'status': 200})
 
 
 class AddMeal(LoginRequiredMixin, CreateView):
@@ -94,9 +101,3 @@ class UpdateMeal(LoginRequiredMixin, UpdateView):
         kwargs = super(UpdateMeal, self).get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
-
-
-class DeleteMeal(LoginRequiredMixin, DeleteView):
-    model = Meal
-    template_name = 'meals/delete_meal.html'
-    success_url = reverse_lazy('meal_list')

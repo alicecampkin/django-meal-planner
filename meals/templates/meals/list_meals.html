@@ -1,7 +1,5 @@
 {% extends 'core/base.html' %}
-
-
-
+{% load static %}
 {% block content %}
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -13,7 +11,7 @@
 <div id="app" class="meallist">
 
     <div class="meallist__controls">
-        {% include 'partials/addmeal.html' %}
+        {% include 'partials/addmealform.html' %}
         {% include 'partials/memberfilter.html' %}
     </div>
 
@@ -22,37 +20,12 @@
         {% include 'partials/mealtimecontrols.html' %}
 
         <div class="meallist__calendar__cards">
-            <article v-for="(day, i) in schedule" class="card" :class="{ 
-                        'card--active': activeCardIndex === i }" @click="setActiveIndex(day, i)"
-                v-on:click="activeDate = day.dateForForm">
-                <h5>[[day.date]]</h5>
-
-                <section v-if="mealTime == 'Breakfast'">
-                    <h6>Breakfast</h6>
-                    <li v-for="breakfast in day.breakfasts">
-                        [[breakfast.name]]
-                    </li>
-                </section>
-
-                <section v-if="mealTime == 'Lunch'">
-                    <h6>Lunch</h6>
-                    <li v-for="lunch in day.lunches">
-                        [[lunch.name]]
-                    </li>
-                </section>
-
-                <section v-if="mealTime == 'Dinner'">
-                    <h6>Dinner</h6>
-                    <li v-for="dinner in day.dinners">
-                        [[dinner.name]]
-                    </li>
-                </section>
-            </article>
+            {% include 'partials/mealscard.html' %}
         </div>
 
         <div class="meallist__calendar__datecontrols">
             <button v-on:click="page -= 1" class="btn btn-sm btn-outline-secondary">Prev</button>
-            <button v-on:click="page = 0" class="btn btn-sm btn-outline-secondary">Today</button>
+            <button v-on:click="goToday" class="btn btn-sm btn-outline-secondary">Today</button>
             <button v-on:click="page += 1" class="btn btn-sm btn-outline-secondary">Next</button>
         </div>
     </div>
@@ -87,8 +60,32 @@
         methods: {
             setActiveIndex(day, i) {
                 this.activeCardIndex = i
-                console.log(i)
-                console.log(this.i)
+            },
+
+            goToday() {
+                this.page = 0
+                this.activeCardIndex = 0
+            },
+
+            deleteMeal(id) {
+
+                async function deleteFromDB(id) {
+                    const res = await fetch(`delete/${id}`)
+                    const data = res.json()
+                    return data
+                }
+
+                deleteFromDB(id).then(data => {
+                    if (data.status === 200) {
+                        const mealIndex = this.meals.findIndex(meal => meal.id === id)
+                        this.meals.splice(mealIndex, 1)
+                    }
+                })
+
+            },
+
+            deleteThis(index) {
+                this.meals = this.meals.splice(0, index) + this.meals.splice(index + 1)
             }
 
         },
@@ -115,7 +112,7 @@
 
                     // const daysMeals = meals.filter(x => x.date == date.format('YYYY-MM-DD'))
 
-                    const daysMeals = meals.filter(meal => {
+                    const daysMeals = this.meals.filter(meal => {
                         if (meal.date !== date.format('YYYY-MM-DD')) {
                             return false
                         }
