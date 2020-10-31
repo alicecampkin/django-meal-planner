@@ -38,6 +38,10 @@
     const memberNames = JSON.parse(`{{ member_names | safe }}`)
 
     const defaultMealtime = `{{ default_mealtime | safe}}`
+    const activeDate = `{{ active_date | safe }}`
+    const activePage = `{{ active_page | safe}}`
+    const activeIndex = parseInt(`{{ active_index | safe }}`)
+
     console.log(meals)
 
     var app = new Vue({
@@ -47,9 +51,9 @@
         data: {
             meals: meals,
             daysPerPage: 6,
-            page: 0,
-            activeCardIndex: 0,
-            activeDate: dayjs().format('YYYY-MM-DD'),
+            page: activePage,
+            activeCardIndex: activeIndex,
+            activeDate: activeDate,
             formMealTime: '',
             formMeal: null,
             showMeals: true,
@@ -84,9 +88,6 @@
 
             },
 
-            deleteThis(index) {
-                this.meals = this.meals.splice(0, index) + this.meals.splice(index + 1)
-            }
 
         },
 
@@ -156,8 +157,6 @@
             activeDateFormatted: function () {
                 return dayjs(this.activeDate).format('dddd D MMMM')
             }
-
-
         }
     });
 </script>

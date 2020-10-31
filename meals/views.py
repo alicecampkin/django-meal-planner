@@ -9,6 +9,7 @@ from .models import Meal
 from core.models import Member
 from .forms import CreateMealForm
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
 
 @login_required
@@ -17,6 +18,9 @@ def list_meals(request):
 
     meals_queryset = []
     default_mealtime = 'Dinner'
+    active_date = datetime.today().strftime('%Y-%m-%d')
+    active_page = 0
+    active_index = 0
 
     if request.method == 'POST':
         form = CreateMealForm(request.POST, request=request)
@@ -37,9 +41,13 @@ def list_meals(request):
                 meal.members.add(id)
 
             default_mealtime = meal.mealtime
+            active_date = meal.date
+            active_page = request.POST['page']
+            active_index = request.POST['activeIndex']
 
     else:
         form = CreateMealForm(request=request)
+        form.request.path = '/add/'
 
     queryset = Meal.objects.filter(user=request.user).order_by(
         'date').prefetch_related('members')
@@ -59,6 +67,9 @@ def list_meals(request):
     context['meals'] = json.dumps(meals)
     context['form'] = form
     context['default_mealtime'] = default_mealtime
+    context['active_date'] = active_date
+    context['active_page'] = active_page
+    context['active_index'] = active_index
     context['members'] = members
     context['member_names'] = json.dumps(
         list(members.values_list('name', flat=True)))

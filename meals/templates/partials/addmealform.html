@@ -32,6 +32,9 @@
         {% render_field form.members checked=true %}
     </div>
 
+    <input type="hidden" name="page" id="page" v-model="page">
+    <input type="hidden" name="activeIndex" id="activeIndex" v-model="activeCardIndex">
+
     <input type="submit" value="Add" class="btn btn-sm btn-primary">
 
 </form>
