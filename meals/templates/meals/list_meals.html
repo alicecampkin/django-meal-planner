@@ -39,7 +39,7 @@
 
     const defaultMealtime = `{{ default_mealtime | safe}}`
     const activeDate = `{{ active_date | safe }}`
-    const activePage = `{{ active_page | safe}}`
+    const activePage = parseInt(`{{ active_page | safe}}`)
     const activeIndex = parseInt(`{{ active_index | safe }}`)
 
     console.log(meals)
@@ -58,7 +58,7 @@
             formMeal: null,
             showMeals: true,
             mealTime: defaultMealtime,
-            checkedMembers: memberNames
+            checkedMembers: memberNames,
         },
 
         methods: {

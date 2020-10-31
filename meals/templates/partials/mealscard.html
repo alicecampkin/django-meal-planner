@@ -8,7 +8,14 @@
         <h6 class="card__mealtime card__mealtime--breakfast">Breakfast</h6>
         <ul class="card__meals">
             <li class="card__meal card__meal--breakfast" v-for="breakfast in day.breakfasts">
-                [[breakfast.name]]
+                <span class="card__meal__name">[[breakfast.name]]</span>
+
+                <ul class="card__meal--members">
+                    <li v-for="member in breakfast.members">
+                        [[member]]
+                    </li>
+                </ul>
+
                 <a v-on:click="deleteMeal(breakfast.id)" class="card__meal__delete">
                     <img src="{% static 'icons/exit.svg' %}" alt="Delete Meal">
                 </a>
@@ -20,7 +27,14 @@
         <h6 class="card__mealtime card__mealtime--lunch">Lunch</h6>
         <ul class="card__meals">
             <li class="card__meal card__meal--lunch" v-for="lunch in day.lunches">
-                [[lunch.name]]
+                <span class="card__meal__name">[[lunch.name]]</span>
+
+                <ul class="card__meal--members">
+                    <li v-for="member in lunch.members">
+                        [[member]]
+                    </li>
+                </ul>
+
                 <a v-on:click="deleteMeal(lunch.id)" class="card__meal__delete">
                     <img src="{% static 'icons/exit.svg' %}" alt="Delete Meal">
                 </a>
@@ -32,10 +46,19 @@
         <h6 class="card__mealtime card__mealtime--dinner">Dinner</h6>
         <ul class="card__meals">
             <li class="card__meal card__meal--dinner" v-for="dinner in day.dinners">
-                [[dinner.name]]
+                <span class="card__meal__name">[[dinner.name]]</span>
+
+                <ul class="card__meal--members">
+                    <li v-for="member in dinner.members">
+                        [[member]]
+                    </li>
+                </ul>
+
                 <a v-on:click="deleteMeal(dinner.id)" class="card__meal__delete">
                     <img src="{% static 'icons/exit.svg' %}" alt="Delete Meal">
                 </a>
+
+
             </li>
         </ul>
 
