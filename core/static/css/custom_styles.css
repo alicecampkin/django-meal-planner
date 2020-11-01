@@ -311,6 +311,9 @@
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
 }
 
+/* Breakfast */
+/* Lunch */
+/* Dinner */
 .mealform {
   width: 300px;
   padding-bottom: 1rem;
@@ -336,6 +339,7 @@
 }
 
 .mealform input[type=checkbox] {
+  background-color: #40414C;
   margin-right: 0.25rem;
 }
 
