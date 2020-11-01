@@ -77,6 +77,10 @@ def list_meals(request):
     return render(request, 'meals/list_meals.html', context)
 
 
+def meal_detail(request, date):
+    return HttpResponse('Hey')
+
+
 def delete_meal(request, pk):
     meal = Meal.objects.get(pk=pk)
     meal.delete()

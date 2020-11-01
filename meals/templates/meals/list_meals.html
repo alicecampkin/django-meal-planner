@@ -88,6 +88,9 @@
 
             },
 
+            mealDetail(date) {
+                return "{% url 'meal_detail' 'abc' %}".replace('abc', date)
+            }
 
         },
 
@@ -156,7 +159,7 @@
 
             activeDateFormatted: function () {
                 return dayjs(this.activeDate).format('dddd D MMMM')
-            }
+            },
         }
     });
 </script>

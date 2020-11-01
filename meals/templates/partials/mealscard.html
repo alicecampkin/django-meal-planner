@@ -63,4 +63,7 @@
         </ul>
 
     </section>
+    <a class="card__expand" v-bind:href="mealDetail(day.dateForForm)"><img src="{% static 'icons/expand.svg' %}"
+            alt="view full details"></a>
+    <div class="card__overlay"></div>
 </article>
