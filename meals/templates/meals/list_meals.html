@@ -74,7 +74,8 @@
             deleteMeal(id) {
 
                 async function deleteFromDB(id) {
-                    const res = await fetch(`delete/${id}`)
+                    const url = "{% url 'delete_meal' 123 %}".replace(123, id)
+                    const res = await fetch(url)
                     const data = res.json()
                     return data
                 }
