@@ -1,0 +1,69 @@
+@import './colours';
+
+.meal-manager{
+    display:flex;
+    width:90vw;
+    margin:0 auto;
+}
+
+.meals{
+
+    width: 300px;
+
+    ul {
+        padding:0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__meal{
+        width: fit-content;
+        padding: 0.5rem;
+        margin: 0 0.5rem 0.5rem 0;
+        list-style: none;
+        color: $grey-1;
+        border: 1px solid $grey-1;
+        background: white;
+        border-radius: 5px;
+        transition: all 0.2s ease-in-out;
+
+        &:hover{
+            background: lighten($purple-4, 5%);
+        }
+
+        &--active{
+            background:$purple-4;
+
+            &:hover{
+                background: $purple-4;
+            }
+        }
+    }
+}
+
+.ingredients{
+
+    &__form{
+        display: flex;
+
+        &__submit{
+            height: 38px;
+            width: 76px;
+            background: $teal-4;
+            border: 1px solid $grey-4;
+        }
+    }
+
+    &__table{
+
+        select{
+            height:56px;
+            background:none;
+            border:none;
+        }
+        
+        &__select{
+            padding:0 !important;
+        }
+    }
+}

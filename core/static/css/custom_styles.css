@@ -1,6 +1,33 @@
 /* Breakfast */
 /* Lunch */
 /* Dinner */
+.input-group {
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  padding: 0.5rem;
+  -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.input-group-prepend {
+  background: none;
+}
+
+.input-group-text {
+  background: none;
+  border: none;
+  font-weight: 700;
+}
+
+.form-control {
+  border: none;
+}
+
+/* Breakfast */
+/* Lunch */
+/* Dinner */
 .meallist {
   width: 90vw;
   max-width: 1500px;
@@ -410,6 +437,80 @@
 
 .filtermembers__member input:checked + div img:hover {
   opacity: 0.8;
+}
+
+/* Breakfast */
+/* Lunch */
+/* Dinner */
+.meal-manager {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.meals {
+  width: 300px;
+}
+
+.meals ul {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.meals__meal {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.5rem;
+  margin: 0 0.5rem 0.5rem 0;
+  list-style: none;
+  color: #40414C;
+  border: 1px solid #40414C;
+  background: white;
+  border-radius: 5px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.meals__meal:hover {
+  background: #edecf6;
+}
+
+.meals__meal--active {
+  background: #DCDBEE;
+}
+
+.meals__meal--active:hover {
+  background: #DCDBEE;
+}
+
+.ingredients__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.ingredients__form__submit {
+  height: 38px;
+  width: 76px;
+  background: #D9F1EC;
+  border: 1px solid #CFCFD2;
+}
+
+.ingredients__table select {
+  height: 56px;
+  background: none;
+  border: none;
+}
+
+.ingredients__table__select {
+  padding: 0 !important;
 }
 
 body {
