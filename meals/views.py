@@ -87,6 +87,31 @@ def delete_meal(request, pk):
     return JsonResponse({'status': 200})
 
 
+@login_required
+def meal_manager(request):
+
+    all_meals_queryset = Meal.objects.filter(
+        user=request.user).distinct('name')
+
+    all_meals = []
+    for meal in all_meals_queryset:
+        meal_ingredients = [
+            ingredient.name for ingredient in meal.ingredients.all()]
+        all_meals.append({
+            'id': meal.id,
+            'name': meal.name,
+            'date': meal.date.isoformat(),
+            'mealtime': meal.mealtime,
+            'ingredients': meal_ingredients,
+        })
+
+    context = {
+        'meals': json.dumps(all_meals)
+    }
+
+    return render(request, 'meals/meal_manager.html', context)
+
+
 class AddMeal(LoginRequiredMixin, CreateView):
     model = Meal
     form_class = CreateMealForm

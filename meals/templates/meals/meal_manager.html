@@ -1,0 +1,103 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<div id="app" class="meal-manager">
+
+
+
+    <section class="meals">
+        <h1>Meal Manager</h1>
+        <ul>
+            <li class="meals__meal" v-for="meal in meals" v-on:click="activeMeal = meal"
+                v-bind:class="{'meals__meal--active': activeMeal == meal}">
+                [[meal.name]]
+            </li>
+        </ul>
+    </section>
+
+    <section class="ingredients">
+        <h3>[[activeMeal.name]]</h3>
+        <p>
+            Add some ingredients so you can make your shopping list...
+        </p>
+
+        <form class="ingredients__form" v-on:submit.prevent="addToIngredients">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Ingredient</label>
+                </div>
+                <input class="form-control" type="text" maxlength="100" v-model="activeIngredient">
+            </div>
+            <input type="submit" value="Add" class="ingredients__form__submit">
+        </form>
+
+        <table class="table ingredients__table">
+            <thead>
+                <th>Ingredient</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th></th>
+            </thead>
+
+            <tbody>
+                <tr v-for="ingredient in activeMeal.ingredients">
+                    <td>[[ingredient]]</td>
+                    <td></td>
+                    <td class="ingredients__table__select">
+                        <select name="unit" id="unit">
+                            <option value="_"></option>
+                            <option value="g">g</option>
+                            <option value="kg">kg</option>
+                            <option value="L">L</option>
+                            <option value="ml">ml</option>
+                            <option value="pack">pack(s)</option>
+                            <option value="tin">tin</option>
+                            <option value="bottle">bottle</option>
+                        </select>
+                    </td>
+                    <td><button class="btn btn-sm btn-outline-danger">Del</button></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</div>
+
+
+<script>
+
+    const meals = JSON.parse(`{{ meals | safe }}`)
+    const firstMeal = meals[0]
+
+    var app = new Vue({
+        delimiters: ['[[', ']]'],
+        el: '#app',
+
+        data: {
+            meals: meals,
+            activeMeal: firstMeal,
+            activeIngredient: null,
+        },
+
+        methods: {
+
+            addToIngredients() {
+                this.activeMeal.ingredients.push(this.activeIngredient)
+                console.log(this.activeMeal.ingredients)
+            },
+        },
+
+        computed: {
+
+        }
+    });
+</script>
+
+{% endblock %}
